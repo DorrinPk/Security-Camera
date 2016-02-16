@@ -29,6 +29,6 @@ System: Mac OS X Yosemite, 16 GB SD card
 5. [Connect the camera module to raspberry pi.](https://www.youtube.com/watch?v=DosQ0V39WAA)
 6. Test the camera : 
 
-  `Raspistill -o  -v cam.jpg
+  `Raspistill -o  -v cam.jpg`
 
 
