@@ -2,23 +2,33 @@
 
 System: Mac OS X Yosemite, 16 GB SD card 
 
-Unmout the SD card to overwrite the disk : 
-diskutil unmountDisk /dev/disk<disk# from diskutil>
+1. Unmout the SD card to overwrite the disk : 
+ 
+   `diskutil unmountDisk /dev/disk<disk# from diskutil>`
 
-copy the image to the sd card :
+2. copy the image to the sd card :
 
-sudo dd bs=1m if=2016-02-09-raspbian-jessie.img of=/dev/rdisk4
+  `sudo dd bs=1m if=2016-02-09-raspbian-jessie.img of=/dev/rdisk#`
 
-Step 2 : 
-configure the Raspberry pi with edimax wireless adapter : 
-sudo vi /etc/network/interfaces 
-allow-hotplug wlan0 
-iface wlan0 inet dhcp 
-wpa-ssid "YOUR NETWORK SSID"
-wpa-psk "WIFI PASSWORD"
+3. configure the Raspberry pi with edimax wireless adapter. Add this to your interfaces file.
 
-sudo reboot 
+  `sudo vi /etc/network/interfaces`
+  
+   `allow-hotplug wlan0 `
+   
+   `iface wlan0 inet dhcp`
+   
+   `wpa-ssid "YOUR NETWORK SSID"`
+   
+   `wpa-psk "WIFI PASSWORD"`
+   
+4. Reboot
 
-Step 3 : 
+    `sudo reboot`
+
+5. [Connect the camera module to raspberry pi.](https://www.youtube.com/watch?v=DosQ0V39WAA)
+6. Test the camera : 
+
+  `Raspistill -o  -v cam.jpg
 
 
