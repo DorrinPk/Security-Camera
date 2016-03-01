@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>HTML5 Demo: getUserMedia </title>
+        <link rel="stylesheet" href="style.css">
+        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+
+    </head>
+    <body>
+       <div style="visibility: hidden;  width:0; height:0;">
+            <canvas id="can" width="320" id="canvas" height="240" style="display: inline;"></canvas>
+       </div>
+        <div id="video-container">
+            <video id="camera-stream" width="500" autoplay></video>
+            <img id="target" style="display: inline;"/>
+        </div>
+        <input id="label" type="text" style="position: relative;display: block;vertical-align: top;width: 100px;margin: 5px auto;"/>
+        <label class="switch">
+          <input class="switch-input" type="checkbox" />
+          <span class="switch-label" data-on="" data-off="Train"></span> <span class="switch-handle"></span>             </label>
+        <script src="script.js"></script>
+    </body>
+</html>
