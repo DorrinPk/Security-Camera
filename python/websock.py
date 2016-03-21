@@ -1,6 +1,7 @@
 import base64
 import cv2
 import numpy
+import os.path
 from flask import Flask, render_template
 from flask.ext.socketio import SocketIO, emit
 
@@ -11,6 +12,10 @@ faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 model = cv2.createLBPHFaceRecognizer(threshold=50.0)
 X,Y = [],[]
 did_train = False
+
+if(os.path.isfile('test.yml')):
+	model.load('test.yml')
+	did_train = True
 
 @socketio.on('connect')
 def test_connect():
@@ -35,6 +40,7 @@ def handle_train(train):
 		emit('image', {'test':img_str})
 		del X[:]
 		del Y[:]
+	model.save("test.yml")
 
 @socketio.on('recognition')
 def handle_blob(blob):
