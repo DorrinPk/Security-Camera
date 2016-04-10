@@ -2,9 +2,14 @@
 
 System: Mac OS X Yosemite, 16 GB SD card 
 
+A. diskutil list 
+
 1. Unmout the SD card to overwrite the disk : 
  
    `diskutil unmountDisk /dev/disk<disk# from diskutil>`
+
+2. Start fdisk to partition the SD card: 
+   `fdisk /dev/<#>`
 
 2. copy the image to the sd card :
 
