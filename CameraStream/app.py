@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# giving credit
 from flask import Flask, render_template, Response
 
 # emulated camera
