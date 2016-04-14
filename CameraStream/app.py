@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# giving credit
+# original file : https://github.com/miguelgrinberg/flask-video-streaming
 from flask import Flask, render_template, Response
 
 # emulated camera
