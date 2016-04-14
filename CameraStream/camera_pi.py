@@ -1,3 +1,4 @@
+# original file : <https://github.com/miguelgrinberg/flask-video-streaming>
 import time
 import io
 import threading
