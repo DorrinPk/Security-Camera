@@ -36,4 +36,11 @@ A. diskutil list
 
   `Raspistill -o  -v cam.jpg`
 
+## For the Streaming : 
+
+1. install python pip 
+2. pip install flask 
+3. pip install picamera 
+4. 
+
 
