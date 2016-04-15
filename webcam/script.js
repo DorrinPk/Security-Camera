@@ -33,7 +33,7 @@ if(navigator.webkitGetUserMedia){
     var vid = document.getElementById('camera-stream');
     var canvas = document.getElementById('can');
     var ctx =canvas.getContext('2d');
-    var socket = io.connect('http://192.168.1.4:5000');
+    var socket = io.connect('http://127.0.0.1:5000');
     socket.on('connect', function() {
         console.log("connected");
         socket.emit('my event', {data: 'I\'m connected!'});
