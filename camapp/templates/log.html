@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% for post in logs %}
+	<article>
+		<h2>
+			{{ post.who }} 
+		</h2>
+		<i class="clock"> </i><time data-time="{{ post.timestamp }}" class="distime" datetime="{{
+post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp }}</time> 
+	</article>
+{% endfor %}
+{% endblock %}

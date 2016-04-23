@@ -1,3 +1,4 @@
+import requests
 import base64
 import cv2
 import numpy
@@ -44,19 +45,20 @@ def handle_train(train):
 
 @socketio.on('recognition')
 def handle_blob(blob):
+	label = -2
 	img,gray,faces = get_image_from_str(str(blob['data']))
 	predict_img = numpy.asarray(gray, dtype= numpy.uint8)
         #try to do facial recon here
 	for(x, y, w, h) in faces:
-		print(did_train)
 		if did_train:
 			[p_label, p_confidence] = model.predict(predict_img[y: y + h, x: x + w])
+			dictToSend = {'label':p_label}
+			requests.post('http://localhost:8000/log', json=dictToSend)
 			print "Predicted label = %d (confidence=%.2f)" % (p_label, p_confidence)
 			cv2.putText(img, str(p_label),(x,y),cv2.FONT_HERSHEY_SIMPLEX, 2,255)
 		cv2.rectangle(img, (x,y) , (x+w, y+h), (0, 255, 0), 2)
 	img_str = cv2.imencode('.jpg', img)[1].tostring()
 	img_str = base64.b64encode(img_str)
-	#print(img_str)
 	emit('image', {'test': img_str})
 
 def get_image_from_str(string):
@@ -64,14 +66,14 @@ def get_image_from_str(string):
 	nparr = numpy.fromstring(imdata, numpy.uint8)
 	img = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
 	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-	faces = faceCascade.detectMultiScale(gray)
-	#faces = faceCascade.detectMultiScale(
-	#	gray,
-	#	scaleFactor=1.1,
-	#	minNeighbors=5,
-	#	minSize=(30,30),
-	#	flags=cv2.cv.CV_HAAR_SCALE_IMAGE
-	#)
+	#faces = faceCascade.detectMultiScale(gray)
+	faces = faceCascade.detectMultiScale(
+		gray,
+		scaleFactor=1.1,
+		minNeighbors=4,
+		minSize=(30,30),
+		flags=cv2.cv.CV_HAAR_SCALE_IMAGE
+	)
 	return img,gray,faces
 
 if __name__ == '__main__':

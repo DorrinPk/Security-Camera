@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="visibility: hidden; width:0; height:0;">
+	<canvas id="can" width="320" id="canvas" height="240" style="display: inline;"></canvas>
+</div>
+<div id="video-container">
+	<video id="camera-stream" width="100%" autoplay></video>
+	<img id="target" style="display: inline;"/>
+</div>
+<script src="/static/js/script.js"></script>
+{% endblock %}

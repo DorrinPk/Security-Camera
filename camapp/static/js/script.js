@@ -9,29 +9,10 @@ window.onload = function() {
                               navigator.mozGetUserMedia ||
                               navigator.msGetUserMedia);
 
-$('.switch-input').prop('disabled',true);
 
-
-$('#label').change(function() {
-    if( !$(this).val() ) {
-        $('.switch-input').prop('checked',false);
-        $('.switch-input').prop('disabled',true);
-    }else{
-        $('.switch-input').prop('disabled',false);
-    }
-});
 
 var label_id = 0;
 
-$('.switch-input').change(function(){
-    if($(this).prop('checked')){
-        $('#label').prop('disabled',true);
-        label_id++;
-        console.log($('#label').val())
-    }else{
-        $('#label').prop('disabled',false);
-    }
-});
 
 if(navigator.getUserMedia){
     //request the camera
@@ -70,11 +51,11 @@ if(navigator.getUserMedia){
                 var data = canvas.toDataURL();
                 var output=data.replace(/^data:image\/(png|jpg);base64,/, "");
                 if($('.switch-input').prop('checked')){
-                    socket.emit('train',{data: output,value: $('#label').val(), id: label_id });
+                    socket.emit('train',{data: output,value: $('#label').val(), id: parseInt($('#labelid').val()) });
                 }else{
                     socket.emit('recognition',{data: output,value: $('#label').val() });
                 }
-            }, 1200);
+            }, 2000);
     socket.on('image',function(data){
         if(data){
             var img = new Image();

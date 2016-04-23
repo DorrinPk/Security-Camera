@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="visibility: hidden; width:0; height:0;">
+        <canvas id="can" width="320" id="canvas" height="240" style="display: inline;"></canvas>
+</div>
+<div id="video-container">
+        <video id="camera-stream" width="100%" autoplay></video>
+        <img id="target" style="display: inline;"/>
+</div>
+<input id="label" type="text" style="position: relative;display: block;vertical-align:top;width:100px;margin: 5px auto;" value="{{ form.data.user }}"/>
+<input id="labelid" type="text" style="position: relative;display: block;vertical-align:top;width:100px;margin: 5px auto;" value="{{ user.id }}"/>
+<label class="switch">
+	<input class="switch-input" type="checkbox"/>
+	<span class="swithc-input" data-on"" data-off="Train"></span>
+	<span class="switch-handle"></span>
+	</label>
+{% endblock %}
+
