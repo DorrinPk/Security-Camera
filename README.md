@@ -38,9 +38,15 @@ A. diskutil list
 
 ## For the Streaming : 
 
-1. install python pip 
-2. pip install flask 
-3. pip install picamera 
-4. 
+- A pi 2 is necessary, camera module
+- Install python 2.7 or higher (apt-get install python)
+- Install OpenCV (apt-get install python-opencv)
+- In raspbian config enable the pi camera module
+- Enable driver for camera module (sudo modprobe bcm2835-v4l2)
+- Uninstall all python dependencies
+- Install flask, flask socketio, peewee, flask login, flask bcrypt, flask wtf, flask request
+- Start webserver and application
+- Go to localhost. (default admin user)
+
 
 
