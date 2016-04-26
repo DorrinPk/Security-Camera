@@ -43,7 +43,8 @@ def register():
 		flash("Yay, you registered!", "success")
 		models.User.create_user(
 			user=form.user.data,
-			password=form.password.data
+			password=form.password.data,
+			admin=form.is_admin.data
 		)
 		return render_template('addface.html', form=form, user=models.User.get(models.User.user == form.user.data))
 	return render_template('register.html', form=form)

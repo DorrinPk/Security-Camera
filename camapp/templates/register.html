@@ -5,7 +5,11 @@
 <form method="POST" action "" class="form">
 	{{ form.hidden_tag() }}
 	{% for field in form %}
-		{{ render_field(field) }}
+		{% if field.type == "BooleanField" %}
+			{{field.label}} {{field}}
+		{% else %}
+			{{ render_field(field) }}
+		{% endif %}
 	{% endfor %}
 	<button type="submit" id="submit"> Register</button>
 </form>
