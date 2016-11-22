@@ -3,12 +3,7 @@ import base64
 import cv2
 import numpy
 import os.path
-from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 model = cv2.face.createLBPHFaceRecognizer(threshold=50.0)
 X,Y = [],[]
@@ -18,15 +13,6 @@ if(os.path.isfile('test.yml')):
 	model.load('test.yml')
 	did_train = True
 
-@socketio.on('connect')
-def test_connect():
-	print('received connection: ')
-
-@socketio.on('my event')
-def test_event(message):
-	print('received message: ' + message['data'])
-
-@socketio.on('train')
 def handle_train(train):
 	global did_train
 	did_train = True
@@ -43,7 +29,7 @@ def handle_train(train):
 		del Y[:]
 	model.save("test.yml")
 
-@socketio.on('recognition')
+
 def handle_blob(blob):
 	label = -2
 	img,gray,faces = get_image_from_str(str(blob['data']))
@@ -64,7 +50,7 @@ def handle_blob(blob):
 def get_image_from_str(string):
 	imdata = base64.b64decode(string)
 	nparr = numpy.fromstring(imdata, numpy.uint8)
-	img = cv2.imdecode(nparr,1)
+	img = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
 	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	#faces = faceCascade.detectMultiScale(gray)
 	faces = faceCascade.detectMultiScale(
@@ -72,10 +58,8 @@ def get_image_from_str(string):
 		scaleFactor=1.1,
 		minNeighbors=4,
 		minSize=(30,30),
-		#flags=cv2.CV_HAAR_SCALE_IMAGE
-                flags = 0
+		flags=cv2.cv.CV_HAAR_SCALE_IMAGE
 	)
 	return img,gray,faces
 
-if __name__ == '__main__':
-	socketio.run(app)
+
