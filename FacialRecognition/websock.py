@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
-model = cv2.face.createLBPHFaceRecognizer(threshold=50.0)
+model = cv2.createLBPHFaceRecognizer(threshold=50.0)
 X,Y = [],[]
 did_train = False
 
